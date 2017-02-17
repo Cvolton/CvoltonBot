@@ -12,6 +12,7 @@ using Dropbox.Api;
 using Dropbox.Api.Files;
 using System.Net;
 using YoutubeExtractor;
+using System.Diagnostics;
 
 namespace ConsoleApplication6
 {
@@ -277,7 +278,7 @@ namespace ConsoleApplication6
                 .Parameter("page", ParameterType.Unparsed)
                 .Do(async (a) =>
                 {
-                    await a.Channel.SendMessage("generateHash.php (the one required file for 2.1 GDPSes) will eventually be published 'soon'");
+                    await a.Channel.SendMessage("generateHash.php (the one required file for 2.1 GDPSes) is out :tbh:");
                 });
             cservice.CreateCommand("songreup")
                 .Description("Queues a YouTube song for reuploading onto CvoltonGDPS")
@@ -328,23 +329,15 @@ namespace ConsoleApplication6
 
         public string VidDwnld(string link)
         {
+            Process proces = new Process();
             try
             {
-                var youTube = YouTube.Default; // starting point for YouTube actions
-                var video = youTube.GetVideo(link); // gets a Video object with info about the video
-                string filename = @"D:\dropbox\Dropbox\autogdsong\" + video.FullName;
-                File.WriteAllBytes(filename, video.GetBytes());
-                /*IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
-                VideoInfo video = videoInfos
-                .First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
-                if (video.RequiresDecryption)
-                {
-                    DownloadUrlResolver.DecryptDownloadUrl(video);
-                }
-                var videoDownloader = new VideoDownloader(video, Path.Combine(@"D:\dropbox\Dropbox\autogdsong\", video.Title + video.VideoExtension));
-                videoDownloader.DownloadProgressChanged += (sender, args) => Console.WriteLine(args.ProgressPercentage);
-                videoDownloader.Execute();*/
-                return "Song queued for reupload: " + link;
+                proces.StartInfo.WorkingDirectory = @"D:\dropbox\Dropbox\autogdsong";
+                proces.StartInfo.FileName = @"D:\dropbox\Dropbox\youtube-dl.exe";
+                proces.StartInfo.Arguments = link;
+                proces.StartInfo.CreateNoWindow = true;
+                proces.Start();
+                return "Song queued succesfully.";
             }
             catch (Exception e)
             {
