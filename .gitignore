@@ -45,3 +45,20 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.dll
+packages/Nito.AsyncEx.3.0.1/lib/net45/Nito.AsyncEx.xml
+*.suo
+*.csproj
+*.config
+*.pdb
+*.exe
+*.ps1
+packages/Nito.AsyncEx.3.0.1/lib/MonoAndroid/Nito.AsyncEx.Concurrent.xml
+*.txt
+packages/RestSharp.105.2.3/RestSharp.105.2.3.nupkg
+*.nupkg
+*.xml
+ConsoleApplication6/Properties/AssemblyInfo.cs
+*.sln
+ConsoleApplication6/bin/Debug/ConsoleApplication6.vshost.exe.manifest
+*.cache
